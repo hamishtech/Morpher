@@ -1,40 +1,24 @@
 import { Box, Button, Container, Flex, Input } from "@chakra-ui/react";
-import { chakra } from "@chakra-ui/react";
-import axios from "axios";
+
 import { getSession, signout, useSession } from "next-auth/client";
 import { useState } from "react";
+import Avatar from "../components/avatar";
+import AvatarView from "../components/avatarView";
+import Upload from "../components/uploadWidget";
+import { supabase } from "../utils/supabaseClient";
 
-const AppHome = () => {
-  const [tweet, setTweet] = useState("");
+const AppHome = ({ pictures }) => {
   const [session, loading] = useSession();
-
-  function handleTweeet() {
-    axios.post("/api/tweet", { tweet });
-  }
-  function handleChangePic() {
-    axios.get("/api/changePic");
-  }
+  const [avatars, setAvatars] = useState(pictures);
 
   if (loading) return null;
 
   return (
     <Container>
-      <Button onClick={() => signout()}> Logout</Button>
-      <Box>Send a tweet</Box>
-      <Input
-        onChange={(e) => {
-          setTweet(e.target.value);
-        }}
-      ></Input>
-      <Button onClick={handleTweeet}>Send</Button>
-      <Button onClick={handleChangePic}>Change Pic</Button>
-      <Flex mt={10} direction='column'>
-        <Button>Upload picture</Button>
-        <Box>Image 1</Box>
-        <Box>Image 2</Box>
-        <Box>Image 3</Box>
-        <Box>Image 4</Box>
-      </Flex>
+      <Box>
+        <Upload />
+        <AvatarView avatars={avatars} setAvatars={setAvatars}></AvatarView>
+      </Box>
     </Container>
   );
 };
@@ -53,7 +37,14 @@ export async function getServerSideProps(context) {
     };
   }
 
-  return {
-    props: {},
-  };
+  const response = await supabase
+    .from("avatars")
+    .select("*")
+    .eq("user_id", session.userID);
+
+  if (response.data) {
+    return {
+      props: { pictures: response.data },
+    };
+  }
 }

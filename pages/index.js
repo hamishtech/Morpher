@@ -1,22 +1,20 @@
 import { Box, Button, Container, Flex, Text } from "@chakra-ui/react";
-import { getSession, signIn, signOut, useSession } from "next-auth/client";
+import {
+  getProviders,
+  getSession,
+  signIn,
+  signOut,
+  useSession,
+} from "next-auth/client";
 import { useRouter } from "next/dist/client/router";
+import Hero from "../components/homepage/hero";
 
-const HomePage = () => {
+const HomePage = ({ providers }) => {
   const router = useRouter();
   return (
-    <Container>
-      <Flex direction='column'>
-        <Box>Welcome to homepage</Box>
-        <Box>
-          <Button onClick={signIn}> Sign in with twitter</Button>
-          <Button onClick={signOut}> Logout</Button>
-        </Box>
-        <Box mt={10}>
-          <Button onClick={() => router.push("/webapp")}> Enter app</Button>
-        </Box>
-      </Flex>
-    </Container>
+    <Box h='100vh'>
+      <Hero providers={providers} />
+    </Box>
   );
 };
 
@@ -35,7 +33,8 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const providers = await getProviders();
   return {
-    props: {},
+    props: { providers },
   };
 }

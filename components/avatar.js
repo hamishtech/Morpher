@@ -1,7 +1,6 @@
 import { Box, Button } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
-import { supabase } from "../utils/supabaseClient";
 
 const Avatar = () => {
   const [uploading, setUploading] = useState(false);
