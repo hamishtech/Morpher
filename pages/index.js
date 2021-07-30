@@ -24,7 +24,7 @@ export async function getServerSideProps(context) {
   if (session) {
     return {
       redirect: {
-        destination: "/avatars",
+        destination: "/app/avatars",
         permanent: false,
       },
     };

@@ -3,26 +3,19 @@ import {
   Box,
   Button,
   chakra,
-  CloseButton,
   Flex,
   HStack,
-  IconButton,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuItem,
   MenuList,
-  Select,
-  Text,
   useColorModeValue,
   useDisclosure,
-  VStack,
 } from "@chakra-ui/react";
-import axios from "axios";
-import { signout, useSession } from "next-auth/client";
+import { signout } from "next-auth/client";
 import { useRouter } from "next/dist/client/router";
-import React, { useState } from "react";
-import { AiFillHome, AiOutlineInbox, AiOutlineMenu } from "react-icons/ai";
+import React from "react";
+import { AiFillPicture, AiFillSmile } from "react-icons/ai";
 
 export default function NavBar() {
   const bg = useColorModeValue("white", "gray.800");
@@ -49,7 +42,7 @@ export default function NavBar() {
                 onClick={() => {
                   view === "avatars" ? null : router.push("/app/avatars");
                 }}
-                leftIcon={<AiOutlineInbox />}
+                leftIcon={<AiFillSmile />}
               >
                 Avatars
               </Button>
@@ -60,7 +53,7 @@ export default function NavBar() {
                 }}
                 colorScheme={view === "banners" ? "twitter" : null}
                 fontSize='xl'
-                leftIcon={<AiOutlineInbox />}
+                leftIcon={<AiFillPicture />}
               >
                 Banners
               </Button>

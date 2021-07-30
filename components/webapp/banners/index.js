@@ -7,10 +7,10 @@ const BannerView = ({ banners, setBanners }) => {
   return (
     <>
       <SimpleGrid
-        spacing='10px'
+        spacing='100px'
         columns={{
           base: 1,
-          md: 1,
+          md: 2,
         }}
       >
         {banners.map((banner) => {

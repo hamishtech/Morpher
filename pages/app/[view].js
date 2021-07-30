@@ -1,6 +1,5 @@
-import { Box, Container, Flex, Select, Switch } from "@chakra-ui/react";
-import axios from "axios";
-import { getSession, useSession } from "next-auth/client";
+import { Container, Flex } from "@chakra-ui/react";
+import { getSession } from "next-auth/client";
 import { useRouter } from "next/dist/client/router";
 import { useState } from "react";
 import Footer from "../../components/footer";
@@ -26,7 +25,7 @@ const AppHome = (props) => {
   return (
     <>
       <NavBar />
-      <Container maxW='container.xl' mt={10}>
+      <Container maxW='container.xl' mt={10} h='100vh'>
         <Flex
           direction='column'
           alignItems='center'

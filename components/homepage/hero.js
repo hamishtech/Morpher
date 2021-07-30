@@ -9,7 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { signIn } from "next-auth/client";
-import Image from "next/image"; 
+import Image from "next/image";
 
 export default function Hero({ providers }) {
   return (
@@ -25,14 +25,22 @@ export default function Hero({ providers }) {
           fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
           lineHeight={"110%"}
         >
-          Twitter {""}
-          <Text as={"span"} color={"blue.400"}>
-            Profile Pic Manager
+          Automatically Change {""} <br />
+          <Text
+            as={"span"}
+            color={"blue.400"}
+            fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
+          >
+            Avatars and Banners on Twitter
           </Text>
         </Heading>
-        <Text color={"gray.500"} maxW={"3xl"} fontSize='2xl'>
-          Do you have multiple profile pictures that you want to use on Twitter?
-          This tool automatically changes your profile picture on Twitter.
+        <Text
+          color={"gray.500"}
+          maxW={"3xl"}
+          fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
+        >
+          Do you have multiple avatars or banners that you want to showcase on
+          Twitter? Twics automatically changes your avatars and banners every hour.
         </Text>
         <Stack spacing={6} direction={"row"}>
           <Button
@@ -49,16 +57,21 @@ export default function Hero({ providers }) {
           </Button>
         </Stack>
         <Box>
+          <Text fontWeight='bold' fontSize='2xl' my={6}>
+            How It Works
+          </Text>
           <OrderedList textAlign='left' fontSize='xl'>
             <ListItem>Sign in with your Twitter account</ListItem>
-            <ListItem>Upload your profile pictures</ListItem>
-            <ListItem>Set your change interval (i.e. every 2 hours)</ListItem>
+            <ListItem>Upload your banner and avatar images</ListItem>
+            {/* <ListItem>Set your change interval (i.e. every 2 hours)</ListItem> */}
             <ListItem>
-              Thats it! Your profile pic will now automatically change
+              Thats it! Your banner will now automatically change every hour
             </ListItem>
           </OrderedList>
         </Box>
-        <Box>{/* <Illustration /> */}</Box>
+        <Box>
+          <Illustration />
+        </Box>
       </Stack>
     </Container>
   );
@@ -67,8 +80,8 @@ export default function Hero({ providers }) {
 export const Illustration = (props) => {
   return (
     <Image
-      height='1000px'
-      width='2000px'
+      height='200'
+      width='1000'
       src='https://assets.website-files.com/5bff8886c3964a992e90d465/5c00621b7aefa4f9ee0f4303_wide-shot.svg'
     />
   );
