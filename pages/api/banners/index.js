@@ -1,7 +1,7 @@
 import { getSession, useSession } from "next-auth/client";
 import { supabase } from "../../../utils/supabaseClient";
-import Twit from "twit";
 const imageToBase64 = require("image-to-base64");
+import Twitter from "twitter-lite";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -36,26 +36,35 @@ export default async function handler(req, res) {
 
     try {
       if (req.body.url && data) {
-        let T = new Twit({
+        // let T = new Twit({
+        //   consumer_key: process.env.TWITTER_CONSUMER_KEY,
+        //   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+        //   access_token: data[0].access_token,
+        //   access_token_secret: data[0].access_secret,
+        //   timeout_ms: 60 * 1000, // optional HTTP request timeout to apply to all requests.
+        //   strictSSL: true, // optional - requires SSL certificates to be valid.
+        // });
+
+        const client = new Twitter({
           consumer_key: process.env.TWITTER_CONSUMER_KEY,
           consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-          access_token: data[0].access_token,
+          access_token_key: data[0].access_token,
           access_token_secret: data[0].access_secret,
-          timeout_ms: 60 * 1000, // optional HTTP request timeout to apply to all requests.
-          strictSSL: true, // optional - requires SSL certificates to be valid.
         });
 
         imageToBase64(req.body.url) // Image URL
           .then((response) => {
-            T.post(
-              "account/update_profile_banner",
-              {
-                image: response,
-              },
-              function (err, data, response) {
-                console.log(data);
-              }
-            );
+            client
+              .post("account/update_profile_banner", {
+                banner: response,
+              })
+              .then((response) => {
+                console.log(response);
+                res.end();
+              })
+              .catch((err) => {
+                console.log(err);
+              });
           })
           .catch((error) => {
             console.log(error); // Logs an error if there was one

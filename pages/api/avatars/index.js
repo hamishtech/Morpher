@@ -29,12 +29,14 @@ export default async function handler(req, res) {
   if (req.method === "PUT") {
     const session = await getSession({ req });
 
-    const { data, error } = await supabase
-      .from("users")
-      .select("*")
-      .eq("id", session.userID);
-
     try {
+      const { data, error } = await supabase
+        .from("users")
+        .select("*")
+        .eq("id", session.userID);
+
+      console.log(data);
+      
       if (req.body.url && data) {
         let T = new Twit({
           consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -53,16 +55,20 @@ export default async function handler(req, res) {
                 image: response,
               },
               function (err, data, response) {
+                console.log(err);
                 console.log(data);
+                res.end();
               }
             );
           })
           .catch((error) => {
             console.log(error); // Logs an error if there was one
+            res.end();
           });
       }
     } catch (error) {
       console.log(error);
+      res.end();
     }
   }
 

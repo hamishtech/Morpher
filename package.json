@@ -24,7 +24,8 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0",
-    "twit": "^2.2.11"
+    "twit": "^2.2.11",
+    "twitter-lite": "^1.1.0"
   },
   "devDependencies": {
     "eslint": "7.31.0",

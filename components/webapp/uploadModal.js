@@ -63,7 +63,7 @@ function UploadModal({ setAvatars, setBanners, images_count, view }) {
   return (
     <>
       <Button mb={10} onClick={onOpen} bg='blue.500'>
-        Upload Picture
+        Upload
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
