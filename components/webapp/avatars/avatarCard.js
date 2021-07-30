@@ -32,7 +32,7 @@ const AvatarCard = ({ avatar, setAvatars }) => {
           <Flex direction='column'>
             <Button
               mb='1'
-              bg='green.100'
+              bg='green.500'
               onClick={() => {
                 axios.put("/api/avatars", { url: avatar.url });
               }}
@@ -40,7 +40,7 @@ const AvatarCard = ({ avatar, setAvatars }) => {
               Set as Current Avatar
             </Button>
             <Button
-              bg='red.100'
+              bg='red.500'
               onClick={() => {
                 setLoading(true);
                 axios

@@ -36,7 +36,7 @@ const BannerCard = ({ banner, setBanners }) => {
         <Box textAlign='center'>
           <Flex direction='column' mt={5}>
             <Button
-              bg='green.100'
+              bg='green.500'
               onClick={() => {
                 axios.put("/api/banners", { url: banner.url });
               }}
@@ -44,7 +44,7 @@ const BannerCard = ({ banner, setBanners }) => {
               Set as Current Banner
             </Button>
             <Button
-              bg='red.100'
+              bg='red.500'
               onClick={() => {
                 setLoading(true);
                 axios

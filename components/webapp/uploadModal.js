@@ -1,15 +1,15 @@
 import {
-    Box,
-    Button,
-    Center,
-    Modal,
-    ModalBody,
-    ModalCloseButton,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalOverlay,
-    useDisclosure
+  Box,
+  Button,
+  Center,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
@@ -62,7 +62,7 @@ function UploadModal({ setAvatars, setBanners, images_count, view }) {
 
   return (
     <>
-      <Button mb={10} onClick={onOpen}>
+      <Button mb={10} onClick={onOpen} bg='blue.500'>
         Upload Picture
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
