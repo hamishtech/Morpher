@@ -1,11 +1,5 @@
-import { Box, Button, Container, Flex, Text } from "@chakra-ui/react";
-import {
-  getProviders,
-  getSession,
-  signIn,
-  signOut,
-  useSession,
-} from "next-auth/client";
+import { Box } from "@chakra-ui/react";
+import { getProviders, getSession } from "next-auth/client";
 import { useRouter } from "next/dist/client/router";
 import Hero from "../components/homepage/hero";
 
@@ -22,7 +16,6 @@ export default HomePage;
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-  console.log(session);
 
   if (session) {
     return {

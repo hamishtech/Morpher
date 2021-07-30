@@ -5,8 +5,8 @@ import { supabase } from "../../../utils/supabaseClient";
 export default NextAuth({
   providers: [
     Providers.Twitter({
-      clientId: process.env.NEXT_PUBLIC_TWITTER_CONSUMER_KEY,
-      clientSecret: process.env.NEXT_PUBLIC_TWITTER_CONSUMER_SECRET,
+      clientId: process.env.TWITTER_CONSUMER_KEY,
+      clientSecret: process.env.TWITTER_CONSUMER_SECRET,
     }),
   ],
 

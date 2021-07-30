@@ -1,23 +1,12 @@
 import {
-  Flex,
-  Container,
-  Heading,
-  Stack,
-  Text,
-  List,
-  Button,
-  ListItem,
-  ListIcon,
-  OrderedList,
-  UnorderedList,
-  Icon,
-  Box,
+    Box, Button, Container,
+    Heading, ListItem, OrderedList, Stack,
+    Text
 } from "@chakra-ui/react";
 import { signIn } from "next-auth/client";
 import Image from "next/image";
 
 export default function Hero({ providers }) {
-  console.log(providers);
   return (
     <Container maxW={"5xl"}>
       <Stack
@@ -64,7 +53,7 @@ export default function Hero({ providers }) {
             </ListItem>
           </OrderedList>
         </Box>
-        <Box h='1000px' w='1000px'>
+        <Box>
           <Illustration />
         </Box>
       </Stack>

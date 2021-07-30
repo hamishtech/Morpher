@@ -8,12 +8,12 @@ export default async function handler(req, res) {
     const session = await getSession({ req });
     try {
       const { data, error } = await supabase
-        .from("avatars")
+        .from("banners")
         .insert([{ user_id: session.userID, url: req.body.url }]);
       if (error) throw error;
       if (data) {
         const response = await supabase
-          .from("avatars")
+          .from("banners")
           .select("*")
           .eq("user_id", session.userID);
         if (response.data) {
@@ -48,7 +48,7 @@ export default async function handler(req, res) {
         imageToBase64(req.body.url) // Image URL
           .then((response) => {
             T.post(
-              "account/update_profile_image",
+              "account/update_profile_banner",
               {
                 image: response,
               },
@@ -70,12 +70,12 @@ export default async function handler(req, res) {
     const session = await getSession({ req });
     try {
       const { data, error } = await supabase
-        .from("avatars")
+        .from("banners")
         .delete()
         .eq("id", req.body.id);
 
       const response = await supabase
-        .from("avatars")
+        .from("banners")
         .select("*")
         .eq("user_id", session.userID);
       if (response.data) {

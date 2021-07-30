@@ -2,19 +2,19 @@ import { Box, Container, Flex, Select } from "@chakra-ui/react";
 import axios from "axios";
 import { getSession, useSession } from "next-auth/client";
 import { useState } from "react";
-import AvatarView from "../components/webapp/avatars";
-import NavBar from "../components/webapp/navbar";
-import UploadModal from "../components/webapp/uploadModal";
-import { supabase } from "../utils/supabaseClient";
+import BannerView from "../../components/webapp/banners";
+import NavBar from "../../components/webapp/navbar";
+import UploadModal from "../../components/webapp/uploadModal";
+import { supabase } from "../../utils/supabaseClient";
 
 const AppHome = ({ pictures, user }) => {
   const [_, loading] = useSession();
-  const [avatars, setAvatars] = useState(pictures);
+  const [banners, setBanners] = useState(pictures);
   const [selectValue, setSelectValue] = useState(user.interval);
 
   if (loading) return null;
 
-  if (!avatars) {
+  if (!banners) {
     return (
       <Container maxW='container.xl' textAlign='center'>
         <UploadModal />
@@ -54,13 +54,13 @@ const AppHome = ({ pictures, user }) => {
               <option value={1}>Every 1 hour</option>
               <option value={6}>Every 6 hours</option>
             </Select> */}
-            {avatars.length > 5 ? (
-              <Box mb={10}>Maximum of 6 pictures reached</Box>
+            {banners.length > 5 ? (
+              <Box mb={10}>Maximum of 6 banners reached</Box>
             ) : (
-              <UploadModal setAvatars={setAvatars} />
+              <UploadModal setBanners={setBanners} />
             )}
           </Flex>
-          <AvatarView avatars={avatars} setAvatars={setAvatars}></AvatarView>
+          <BannerView banners={banners} setBanners={setBanners}></BannerView>
         </Flex>
       </Container>
     </>
@@ -82,7 +82,7 @@ export async function getServerSideProps(context) {
   }
 
   const response = await supabase
-    .from("avatars")
+    .from("banners")
     .select("*")
     .eq("user_id", session.userID);
 
