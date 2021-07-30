@@ -1,7 +1,12 @@
 import {
-    Box, Button, Container,
-    Heading, ListItem, OrderedList, Stack,
-    Text
+  Box,
+  Button,
+  Container,
+  Heading,
+  ListItem,
+  OrderedList,
+  Stack,
+  Text,
 } from "@chakra-ui/react";
 import { signIn } from "next-auth/client";
 import Image from "next/image";
@@ -30,18 +35,36 @@ export default function Hero({ providers }) {
           This tool automatically changes your profile picture on Twitter.
         </Text>
         <Stack spacing={6} direction={"row"}>
-          <Button
+          <>
+            {Object.values(providers).map((provider) => (
+              <div key={provider.name}>
+                <Button
+                  rounded={"full"}
+                  px={6}
+                  colorScheme={"twitter"}
+                  onClick={() => {
+                    signIn(provider.id);
+                  }}
+                  bg={"blue.400"}
+                  _hover={{ bg: "blue.500" }}
+                >
+                  Sign in with {provider.name}
+                </Button>
+              </div>
+            ))}
+          </>
+          {/* <Button
             rounded={"full"}
             px={6}
             colorScheme={"twitter"}
             onClick={() => {
-              signIn(providers.twitter.id);
+              signIn(provider.id);
             }}
             bg={"blue.400"}
             _hover={{ bg: "blue.500" }}
           >
-            Sign in with Twitter
-          </Button>
+            Sign in with {provider.name}
+          </Button> */}
         </Stack>
         <Box>
           <OrderedList textAlign='left' fontSize='xl'>
@@ -53,9 +76,7 @@ export default function Hero({ providers }) {
             </ListItem>
           </OrderedList>
         </Box>
-        <Box>
-          {/* <Illustration /> */}
-        </Box>
+        <Box>{/* <Illustration /> */}</Box>
       </Stack>
     </Container>
   );
