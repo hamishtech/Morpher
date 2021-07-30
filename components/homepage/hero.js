@@ -36,7 +36,7 @@ export default function Hero({ providers }) {
         </Text>
         <Stack spacing={6} direction={"row"}>
           <>
-            {Object.values(providers).map((provider) => (
+            {/* {Object.values(providers).map((provider) => (
               <div key={provider.name}>
                 <Button
                   rounded={"full"}
@@ -51,9 +51,9 @@ export default function Hero({ providers }) {
                   Sign in with {provider.name}
                 </Button>
               </div>
-            ))}
+            ))} */}
           </>
-          {/* <Button
+          <Button
             rounded={"full"}
             px={6}
             colorScheme={"twitter"}
@@ -64,7 +64,7 @@ export default function Hero({ providers }) {
             _hover={{ bg: "blue.500" }}
           >
             Sign in with {provider.name}
-          </Button> */}
+          </Button>
         </Stack>
         <Box>
           <OrderedList textAlign='left' fontSize='xl'>

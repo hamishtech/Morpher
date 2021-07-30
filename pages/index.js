@@ -29,8 +29,9 @@ export async function getServerSideProps(context) {
       },
     };
   }
-
   const providers = await getProviders();
+
+  console.log(providers);
   return {
     props: { providers },
   };
