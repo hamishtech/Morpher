@@ -2,10 +2,10 @@ import { Box, Container, Flex, Select } from "@chakra-ui/react";
 import axios from "axios";
 import { getSession, useSession } from "next-auth/client";
 import { useState } from "react";
-import AvatarView from "../components/webapp/avatars";
-import NavBar from "../components/webapp/navbar";
-import UploadModal from "../components/webapp/uploadModal";
-import { supabase } from "../utils/supabaseClient";
+import AvatarView from "../../components/webapp/avatars";
+import NavBar from "../../components/webapp/navbar";
+import UploadModal from "../../components/webapp/uploadModal";
+import { supabase } from "../../utils/supabaseClient";
 
 const AppHome = ({ pictures, user }) => {
   const [_, loading] = useSession();

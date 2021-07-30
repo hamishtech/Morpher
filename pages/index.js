@@ -24,14 +24,13 @@ export async function getServerSideProps(context) {
   if (session) {
     return {
       redirect: {
-        destination: "/webapp",
+        destination: "/avatars",
         permanent: false,
       },
     };
   }
   const providers = await getProviders();
 
-  console.log(providers);
   return {
     props: { providers },
   };
