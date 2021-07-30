@@ -69,9 +69,9 @@ export default function Hero({ providers }) {
             </ListItem>
           </OrderedList>
         </Box>
-        <Box>
+        {/* <Box>
           <Illustration />
-        </Box>
+        </Box> */}
       </Stack>
     </Container>
   );

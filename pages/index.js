@@ -8,7 +8,7 @@ const HomePage = ({ providers }) => {
   const router = useRouter();
   return (
     <>
-      <Box h='100vh'>
+      <Box minHeight='100vh'>
         <Hero providers={providers} />
       </Box>
       <Footer />

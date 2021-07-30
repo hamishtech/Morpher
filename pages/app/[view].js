@@ -25,7 +25,7 @@ const AppHome = (props) => {
   return (
     <>
       <NavBar />
-      <Container maxW='container.xl' mt={10} h='100vh'>
+      <Container maxW='container.xl' mt={10} minHeight='100vh'>
         <Flex
           direction='column'
           alignItems='center'
