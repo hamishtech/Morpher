@@ -6,7 +6,7 @@ const AvatarView = ({ avatars, setAvatars }) => {
   return (
     <>
       <SimpleGrid
-        spacing='10px'
+        spacing='100px'
         columns={{
           base: 1,
           md: avatars.length > 1 ? (avatars.length === 2 ? 2 : 3) : 1,

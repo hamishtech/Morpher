@@ -1,14 +1,18 @@
 import { Box } from "@chakra-ui/react";
 import { getProviders, getSession } from "next-auth/client";
 import { useRouter } from "next/dist/client/router";
+import Footer from "../components/footer";
 import Hero from "../components/homepage/hero";
 
 const HomePage = ({ providers }) => {
   const router = useRouter();
   return (
-    <Box h='100vh'>
-      <Hero providers={providers} />
-    </Box>
+    <>
+      <Box h='100vh'>
+        <Hero providers={providers} />
+      </Box>
+      <Footer />
+    </>
   );
 };
 

@@ -1,23 +1,31 @@
 import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  useDisclosure,
+    Box,
+    Button,
+    Center,
+    Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+    useDisclosure
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
 
-function UploadModal({ setAvatars }) {
+function UploadModal({ setAvatars, setBanners, images_count, view }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
-  const view = router.route;
+
+  if (images_count > 5) {
+    return (
+      <Center>
+        <Box mb={10}>Maximum of 6 pictures reached</Box>
+      </Center>
+    );
+  }
 
   const uploadImage = () => {
     setLoading(true);
@@ -39,8 +47,8 @@ function UploadModal({ setAvatars }) {
     )
       .then((resp) => resp.json())
       .then((data) => {
-        axios.post("/api/avatars", { url: data.url }).then((res) => {
-          setAvatars(res.data);
+        axios.post(`/api/${view}`, { url: data.url }).then((res) => {
+          view === "banners" ? setBanners(res.data) : setAvatars(res.data);
           setLoading(false);
           onClose();
         });

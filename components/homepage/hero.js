@@ -54,7 +54,7 @@ export default function Hero({ providers }) {
           </OrderedList>
         </Box>
         <Box>
-          <Illustration />
+          {/* <Illustration /> */}
         </Box>
       </Stack>
     </Container>

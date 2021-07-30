@@ -7,20 +7,8 @@ import NavBar from "../../components/webapp/navbar";
 import UploadModal from "../../components/webapp/uploadModal";
 import { supabase } from "../../utils/supabaseClient";
 
-const AppHome = ({ pictures, user }) => {
-  const [_, loading] = useSession();
+const AppHome = ({ pictures, interval }) => {
   const [avatars, setAvatars] = useState(pictures);
-  const [selectValue, setSelectValue] = useState(user.interval);
-
-  if (loading) return null;
-
-  if (!avatars) {
-    return (
-      <Container maxW='container.xl' textAlign='center'>
-        <UploadModal />
-      </Container>
-    );
-  }
 
   return (
     <>
@@ -31,34 +19,11 @@ const AppHome = ({ pictures, user }) => {
           alignItems='center'
           justifyContent='space-between'
         >
-          <Flex
-            direction='column'
-            alignItems='center'
-            justifyContent='space-between'
-          >
-            {/* <Select
-              onChange={(e) => {
-                setSelectValue(e.target.value);
-                axios
-                  .post("/api/avatarSettings/", {
-                    interval: e.target.value,
-                  })
-                  .then((res) => {
-                    return;
-                  });
-              }}
-              value={selectValue}
-              w='250px'
-            >
-              <option value={0}>Never</option>
-              <option value={1}>Every 1 hour</option>
-              <option value={6}>Every 6 hours</option>
-            </Select> */}
-            {avatars.length > 5 ? (
-              <Box mb={10}>Maximum of 6 pictures reached</Box>
-            ) : (
-              <UploadModal setAvatars={setAvatars} />
-            )}
+          <Flex>
+            <UploadModal
+              setAvatars={setAvatars}
+              images_count={avatars.length}
+            />
           </Flex>
           <AvatarView avatars={avatars} setAvatars={setAvatars}></AvatarView>
         </Flex>
@@ -93,7 +58,7 @@ export async function getServerSideProps(context) {
 
   if (response.data && user.data) {
     return {
-      props: { pictures: response.data, user: user.data[0] },
+      props: { pictures: response.data, interval: user.data[0].interval },
     };
   }
 }

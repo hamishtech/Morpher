@@ -1,4 +1,5 @@
 import { SimpleGrid } from "@chakra-ui/react";
+import UploadModal from "../uploadModal";
 import BannerCard from "./bannerCard";
 
 const BannerView = ({ banners, setBanners }) => {
@@ -9,13 +10,13 @@ const BannerView = ({ banners, setBanners }) => {
         spacing='10px'
         columns={{
           base: 1,
-          md: banners.length > 1 ? (banners.length === 2 ? 2 : 3) : 1,
+          md: 1,
         }}
       >
-        {banners.map((avatar) => {
+        {banners.map((banner) => {
           return (
             <BannerCard
-              key={avatar.id}
+              key={banner.id}
               banner={banner}
               setBanners={setBanners}
             />

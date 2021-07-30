@@ -26,6 +26,27 @@ const AppHome = ({ pictures, user }) => {
     <>
       <NavBar />
       <Container maxW='container.xl' mt={10}>
+        <Box>
+          <Select
+            onChange={(e) => {
+              setSelectValue(e.target.value);
+              axios
+                .post("/api/settings/", {
+                  interval: e.target.value,
+                })
+                .then((res) => {
+                  return;
+                });
+            }}
+            value={selectValue}
+            w='250px'
+          >
+            <option value={0}>Never</option>
+            <option value={1}>Every 1 hour</option>
+            <option value={6}>Every 6 hours</option>
+          </Select>
+        </Box>
+
         <Flex
           direction='column'
           alignItems='center'
@@ -36,26 +57,8 @@ const AppHome = ({ pictures, user }) => {
             alignItems='center'
             justifyContent='space-between'
           >
-            {/* <Select
-              onChange={(e) => {
-                setSelectValue(e.target.value);
-                axios
-                  .post("/api/avatarSettings/", {
-                    interval: e.target.value,
-                  })
-                  .then((res) => {
-                    return;
-                  });
-              }}
-              value={selectValue}
-              w='250px'
-            >
-              <option value={0}>Never</option>
-              <option value={1}>Every 1 hour</option>
-              <option value={6}>Every 6 hours</option>
-            </Select> */}
             {avatars.length > 5 ? (
-              <Box mb={10}>Maximum of 6 pictures reached</Box>
+              <Box mb={10}>Maximum of 6 images reached</Box>
             ) : (
               <UploadModal setAvatars={setAvatars} />
             )}

@@ -1,5 +1,11 @@
 import {
-    Box, Button, Center, Flex, Image, Spinner, useColorModeValue
+  Box,
+  Button,
+  Center,
+  Flex,
+  Image,
+  Spinner,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useState } from "react";
@@ -7,9 +13,8 @@ import React, { useState } from "react";
 const BannerCard = ({ banner, setBanners }) => {
   const [loading, setLoading] = useState(false);
   return (
-    <Flex shadow='xl' w='full' alignItems='center' justifyContent='center'>
+    <Flex w='full' alignItems='center' justifyContent='center'>
       <Box
-        w='xs'
         bg={useColorModeValue("white", "gray.800")}
         rounded='lg'
         overflow='hidden'
@@ -26,12 +31,11 @@ const BannerCard = ({ banner, setBanners }) => {
             />
           </Center>
         ) : (
-          <Image w='full' h={56} fit='cover' src={banner.url} alt='banner' />
+          <Image w={700} h={300} fit='inherit' src={banner.url} alt='banner' />
         )}
         <Box textAlign='center'>
-          <Flex direction='column'>
+          <Flex direction='column' mt={5}>
             <Button
-              mb='1'
               bg='green.100'
               onClick={() => {
                 axios.put("/api/banners", { url: banner.url });
@@ -54,7 +58,7 @@ const BannerCard = ({ banner, setBanners }) => {
             >
               Delete
             </Button>
-          </Flex>{" "}
+          </Flex>
         </Box>
       </Box>
     </Flex>
