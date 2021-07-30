@@ -35,35 +35,17 @@ export default function Hero({ providers }) {
           This tool automatically changes your profile picture on Twitter.
         </Text>
         <Stack spacing={6} direction={"row"}>
-          <>
-            {/* {Object.values(providers).map((provider) => (
-              <div key={provider.name}>
-                <Button
-                  rounded={"full"}
-                  px={6}
-                  colorScheme={"twitter"}
-                  onClick={() => {
-                    signIn(provider.id);
-                  }}
-                  bg={"blue.400"}
-                  _hover={{ bg: "blue.500" }}
-                >
-                  Sign in with {provider.name}
-                </Button>
-              </div>
-            ))} */}
-          </>
           <Button
             rounded={"full"}
             px={6}
             colorScheme={"twitter"}
             onClick={() => {
-              signIn(provider.id);
+              signIn(providers.twitter.id);
             }}
             bg={"blue.400"}
             _hover={{ bg: "blue.500" }}
           >
-            Sign in with {provider.name}
+            Sign in with Twitter
           </Button>
         </Stack>
         <Box>
