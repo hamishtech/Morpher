@@ -65,7 +65,7 @@ export default function Hero({ providers }) {
             <ListItem>Upload your banner and avatar images</ListItem>
             {/* <ListItem>Set your change interval (i.e. every 2 hours)</ListItem> */}
             <ListItem>
-              Thats it! Your banner will now automatically change every hour
+              Thats it! Your avatar and banner will now automatically change every hour
             </ListItem>
           </OrderedList>
         </Box>
