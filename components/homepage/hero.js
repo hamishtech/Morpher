@@ -40,7 +40,7 @@ export default function Hero({ providers }) {
           fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
         >
           Do you have multiple avatars or banners that you want to showcase on
-          Twitter? Twics automatically changes your avatars and banners every hour.
+          Twitter? Morpher automatically changes your avatars and banners every hour.
         </Text>
         <Stack spacing={6} direction={"row"}>
           <Button

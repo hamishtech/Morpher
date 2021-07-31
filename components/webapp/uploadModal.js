@@ -30,12 +30,14 @@ function UploadModal({ setAvatars, setBanners, images_count, view }) {
 
   const uploadURL = () => {
     setLoadingUrl(true);
+
     function checkURL(url) {
       return url.match(/\.(jpeg|jpg|gif|png)$/) != null;
     }
     let isValidUrl = checkURL(url);
     if (!isValidUrl) {
       setInvalidUrl(true);
+      setLoadingUrl(false);
       return;
     }
 
@@ -77,9 +79,7 @@ function UploadModal({ setAvatars, setBanners, images_count, view }) {
   const uploadImage = () => {
     setLoading(true);
     if (!image) {
-      alert(
-        "Error occurred when uploading. Make sure the file size is not above 3mb and its an image"
-      );
+      alert("No image found");
       setLoading(false);
       return;
     }

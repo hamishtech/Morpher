@@ -1,12 +1,8 @@
 import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Image,
-  Spinner,
-  useColorModeValue,
-  useToast,
+    Box,
+    Button, Flex,
+    Image, useColorModeValue,
+    useToast
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useState } from "react";
