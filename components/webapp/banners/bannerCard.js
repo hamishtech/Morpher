@@ -6,11 +6,15 @@ import {
   Image,
   Spinner,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useState } from "react";
 
 const BannerCard = ({ banner, setBanners }) => {
+  const toast = useToast();
+  const [loadingUpdate, setLoadingUpdate] = useState(false);
+
   const [loading, setLoading] = useState(false);
   return (
     <Flex w='full' alignItems='center' justifyContent='center'>
@@ -20,32 +24,34 @@ const BannerCard = ({ banner, setBanners }) => {
         overflow='hidden'
         mx='auto'
       >
-        {loading ? (
-          <Center>
-            <Spinner
-              thickness='4px'
-              speed='0.65s'
-              emptyColor='gray.200'
-              color='blue.500'
-              size='xl'
-            />
-          </Center>
-        ) : (
-          <Image w={700} h={300} fit='inherit' src={banner.url} alt='banner' />
-        )}
+        <Image w={700} h={300} fit='inherit' src={banner.url} alt='banner' />
         <Box textAlign='center'>
           <Flex direction='column' mt={5}>
             <Button
               bg='green.500'
+              isLoading={loadingUpdate}
               onClick={() => {
-                axios.put("/api/banners", { url: banner.url });
+                setLoadingUpdate(true);
+                axios.put("/api/banners", { url: banner.url }).then((res) => {
+                  res.status === 200
+                    ? toast({
+                        title: "Banner Updated.",
+                        status: "success",
+                        duration: 2000,
+                        isClosable: true,
+                      })
+                    : alert("error updating banner");
+                  setLoadingUpdate(false);
+                });
               }}
             >
               Set as Current Banner
             </Button>
             <Button
               bg='red.500'
+              isLoading={loading}
               onClick={() => {
+                isLoading = { loading };
                 setLoading(true);
                 axios
                   .delete("/api/banners", { data: { id: banner.id } })

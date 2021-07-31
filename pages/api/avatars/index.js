@@ -36,7 +36,7 @@ export default async function handler(req, res) {
         .eq("id", session.userID);
 
       console.log(data);
-      
+
       if (req.body.url && data) {
         let T = new Twit({
           consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -55,15 +55,15 @@ export default async function handler(req, res) {
                 image: response,
               },
               function (err, data, response) {
-                console.log(err);
-                console.log(data);
-                res.end();
+                if (data) {
+                  return res.status(200).json({ success: "avatar updated" });
+                }
               }
             );
           })
           .catch((error) => {
             console.log(error); // Logs an error if there was one
-            res.end();
+            res.status(400);
           });
       }
     } catch (error) {

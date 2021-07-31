@@ -1,4 +1,4 @@
-import { Container, Flex } from "@chakra-ui/react";
+import { Box, Container, Flex } from "@chakra-ui/react";
 import { getSession } from "next-auth/client";
 import { useRouter } from "next/dist/client/router";
 import { useState } from "react";
@@ -31,17 +31,27 @@ const AppHome = (props) => {
           alignItems='center'
           justifyContent='space-between'
         >
-          <ScheduleSwitch
-            view={view}
-            on={view === "banners" ? onBanners : onAvatars}
-            setOn={view === "banners" ? setOnBanners : setOnAvatars}
-          />
-          <UploadModal
-            setAvatars={setAvatars}
-            setBanners={setBanners}
-            view={view}
-            images_count={view === "banners" ? banners.length : avatars.length}
-          />
+          <Flex w='100%' justifyContent='space-between'>
+            <Box>
+              {" "}
+              <ScheduleSwitch
+                view={view}
+                on={view === "banners" ? onBanners : onAvatars}
+                setOn={view === "banners" ? setOnBanners : setOnAvatars}
+              />
+            </Box>
+            <Box>
+              <UploadModal
+                setAvatars={setAvatars}
+                setBanners={setBanners}
+                view={view}
+                images_count={
+                  view === "banners" ? banners.length : avatars.length
+                }
+              />
+            </Box>
+          </Flex>
+
           {view === "banners" ? (
             <BannerView banners={banners} setBanners={setBanners} />
           ) : (

@@ -12,18 +12,13 @@ export default NextAuth({
 
   callbacks: {
     async signIn(user, account, profile) {
-      const { data, error } = await supabase.from("users").insert(
-        [
-          {
-            id: account.id,
-            access_token: account.accessToken,
-            access_secret: account.refreshToken,
-          },
-        ],
-        { returning: "minimal" },
-        { upsert: true }
-      );
+      const { data, error } = await supabase.from("users").upsert({
+        id: account.id,
+        access_token: account.accessToken,
+        access_secret: account.refreshToken,
+      });
     },
+
     async redirect(url, baseUrl) {
       console.log(url, baseUrl);
       return baseUrl;

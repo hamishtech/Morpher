@@ -1,10 +1,20 @@
 import {
-    Box, Button, Center, Flex, Image, Spinner, useColorModeValue
+  Box,
+  Button,
+  Center,
+  Flex,
+  Image,
+  Spinner,
+  useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useState } from "react";
 
 const AvatarCard = ({ avatar, setAvatars }) => {
+  const toast = useToast();
+  const [loadingUpdate, setLoadingUpdate] = useState(false);
+
   const [loading, setLoading] = useState(false);
   return (
     <Flex shadow='xl' w='full' alignItems='center' justifyContent='center'>
@@ -15,32 +25,33 @@ const AvatarCard = ({ avatar, setAvatars }) => {
         overflow='hidden'
         mx='auto'
       >
-        {loading ? (
-          <Center>
-            <Spinner
-              thickness='4px'
-              speed='0.65s'
-              emptyColor='gray.200'
-              color='blue.500'
-              size='xl'
-            />
-          </Center>
-        ) : (
-          <Image w='full' h={56} fit='cover' src={avatar.url} alt='avatar' />
-        )}
+        <Image w='full' h={56} fit='cover' src={avatar.url} alt='avatar' />
         <Box textAlign='center'>
           <Flex direction='column'>
             <Button
               mb='1'
+              isLoading={loadingUpdate}
               bg='green.500'
               onClick={() => {
-                axios.put("/api/avatars", { url: avatar.url });
+                setLoadingUpdate(true);
+                axios.put("/api/avatars", { url: avatar.url }).then((res) => {
+                  res.status === 200
+                    ? toast({
+                        title: "Avatar Updated.",
+                        status: "success",
+                        duration: 2000,
+                        isClosable: true,
+                      })
+                    : alert("error updating banner");
+                  setLoadingUpdate(false);
+                });
               }}
             >
               Set as Current Avatar
             </Button>
             <Button
               bg='red.500'
+              isLoading={loading}
               onClick={() => {
                 setLoading(true);
                 axios

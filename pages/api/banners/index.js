@@ -28,7 +28,6 @@ export default async function handler(req, res) {
 
   if (req.method === "PUT") {
     const session = await getSession({ req });
-
     const { data, error } = await supabase
       .from("users")
       .select("*")
@@ -36,15 +35,6 @@ export default async function handler(req, res) {
 
     try {
       if (req.body.url && data) {
-        // let T = new Twit({
-        //   consumer_key: process.env.TWITTER_CONSUMER_KEY,
-        //   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-        //   access_token: data[0].access_token,
-        //   access_token_secret: data[0].access_secret,
-        //   timeout_ms: 60 * 1000, // optional HTTP request timeout to apply to all requests.
-        //   strictSSL: true, // optional - requires SSL certificates to be valid.
-        // });
-
         const client = new Twitter({
           consumer_key: process.env.TWITTER_CONSUMER_KEY,
           consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
@@ -59,18 +49,23 @@ export default async function handler(req, res) {
                 banner: response,
               })
               .then((response) => {
-                console.log(response);
-                res.end();
+                return res.status(200).json({ success: "banner updated" });
               })
               .catch((err) => {
+                res.status(400);
                 console.log(err);
+                throw error;
               });
           })
           .catch((error) => {
+            res.status(400);
             console.log(error); // Logs an error if there was one
+            throw error;
           });
+        res.status(200);
       }
     } catch (error) {
+      res.status(400);
       console.log(error);
     }
   }
