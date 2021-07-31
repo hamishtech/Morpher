@@ -3,11 +3,15 @@ import { getProviders, getSession } from "next-auth/client";
 import { useRouter } from "next/dist/client/router";
 import Footer from "../components/footer";
 import Hero from "../components/homepage/hero";
+import Head from "next/head";
 
 const HomePage = ({ providers }) => {
   const router = useRouter();
   return (
     <>
+      <Head>
+        <title>Morpher</title>
+      </Head>
       <Box minHeight='100vh'>
         <Hero providers={providers} />
       </Box>

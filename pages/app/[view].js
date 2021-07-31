@@ -9,6 +9,7 @@ import NavBar from "../../components/webapp/navbar";
 import ScheduleSwitch from "../../components/webapp/switch";
 import UploadModal from "../../components/webapp/uploadModal";
 import { supabase } from "../../utils/supabaseClient";
+import Head from "next/head";
 
 const AppHome = (props) => {
   const [avatars, setAvatars] = useState(props.avatars);
@@ -24,6 +25,9 @@ const AppHome = (props) => {
 
   return (
     <>
+      <Head>
+        <title>Morpher</title>
+      </Head>
       <NavBar />
       <Container maxW='container.xl' mt={10} minHeight='100vh'>
         <Flex
