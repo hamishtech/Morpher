@@ -41,7 +41,7 @@ const BannerCard = ({ banner, setBanners }) => {
                 });
               }}
             >
-              Set as Current Banner
+              Set as current banner now
             </Button>
             <Button
               bg='red.500'

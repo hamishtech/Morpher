@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
+import { FiUpload } from "react-icons/fi";
 
 function UploadModal({ setAvatars, setBanners, images_count, view }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -120,7 +121,12 @@ function UploadModal({ setAvatars, setBanners, images_count, view }) {
 
   return (
     <>
-      <Button mb={10} onClick={onOpen} bg='blue.500'>
+      <Button
+        mb={10}
+        leftIcon={<FiUpload />}
+        onClick={onOpen}
+        bg='blue.500'
+      >
         Upload
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>

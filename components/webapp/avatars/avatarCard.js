@@ -43,7 +43,7 @@ const AvatarCard = ({ avatar, setAvatars }) => {
                 });
               }}
             >
-              Set as Current Avatar
+              Set as current avatar now
             </Button>
             <Button
               bg='red.500'
