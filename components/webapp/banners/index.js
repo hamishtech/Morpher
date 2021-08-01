@@ -1,5 +1,4 @@
 import { SimpleGrid } from "@chakra-ui/react";
-import UploadModal from "../uploadModal";
 import BannerCard from "./bannerCard";
 
 const BannerView = ({ banners, setBanners }) => {

@@ -1,12 +1,8 @@
 import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Image,
-  Spinner,
-  useColorModeValue,
-  useToast,
+    Box,
+    Button, Flex,
+    Image, useColorModeValue,
+    useToast
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useState } from "react";
@@ -20,7 +16,7 @@ const BannerCard = ({ banner, setBanners }) => {
     <Flex w='full' alignItems='center' justifyContent='center'>
       <Box
         bg={useColorModeValue("white", "gray.800")}
-        rounded='lg'
+        rounded='lg'    
         overflow='hidden'
         mx='auto'
       >
