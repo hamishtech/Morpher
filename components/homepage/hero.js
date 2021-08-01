@@ -40,7 +40,7 @@ export default function Hero({ providers }) {
           fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
         >
           Do you have multiple avatars or banners that you want to showcase on
-          Twitter? Morpher automatically changes your avatars and banners every hour.
+          Twitter? Morpher automatically changes your avatars and banners every 20mins.
         </Text>
         <Stack spacing={6} direction={"row"}>
           <Button
@@ -65,7 +65,7 @@ export default function Hero({ providers }) {
             <ListItem>Upload your banner and avatar images</ListItem>
             {/* <ListItem>Set your change interval (i.e. every 2 hours)</ListItem> */}
             <ListItem>
-              Thats it! Your avatar and banner will now automatically change every hour
+              Thats it! Your avatar and banner will now automatically change every 20 mins
             </ListItem>
           </OrderedList>
         </Box>
