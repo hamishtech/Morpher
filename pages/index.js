@@ -32,7 +32,7 @@ export async function getServerSideProps(context) {
       .select("*")
       .eq("id", session.userID);
 
-    if (user.count)
+    if (user.body.length >= 1)
       return {
         redirect: {
           destination: "/app/avatars",
