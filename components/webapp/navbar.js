@@ -14,14 +14,21 @@ import {
 } from "@chakra-ui/react";
 import { signout } from "next-auth/client";
 import { useRouter } from "next/dist/client/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillPicture, AiFillSmile } from "react-icons/ai";
 
 export default function NavBar() {
   const bg = useColorModeValue("white", "gray.800");
-  const mobileNav = useDisclosure();
   const router = useRouter();
   const { view } = router.query;
+  const [bannersLoading, setBannersLoading] = useState(false);
+  const [avatarsLoading, setAvatarsLoading] = useState(false);
+
+  useEffect(() => {
+    setBannersLoading(false);
+    setAvatarsLoading(false);
+    return () => {};
+  }, [view]);
 
   return (
     <React.Fragment>
@@ -39,7 +46,9 @@ export default function NavBar() {
                 variant='solid'
                 fontSize='xl'
                 colorScheme={view === "avatars" ? "twitter" : null}
+                isLoading={avatarsLoading}
                 onClick={() => {
+                  view === "avatars" ? null : setAvatarsLoading(true);
                   view === "avatars" ? null : router.push("/app/avatars");
                 }}
                 leftIcon={<AiFillSmile />}
@@ -48,7 +57,9 @@ export default function NavBar() {
               </Button>
               <Button
                 variant='solid'
+                isLoading={bannersLoading}
                 onClick={() => {
+                  view === "banners" ? null : setBannersLoading(true);
                   view === "banners" ? null : router.push("/app/banners");
                 }}
                 colorScheme={view === "banners" ? "twitter" : null}

@@ -14,6 +14,7 @@ export default NextAuth({
     async signIn(user, account, profile) {
       const { data, error } = await supabase.from("users").upsert({
         id: account.id,
+        handle: account.params.screen_name,
         access_token: account.accessToken,
         access_secret: account.refreshToken,
       });
