@@ -14,8 +14,8 @@ import React, { useState } from "react";
 const BannerCard = ({ banner, setBanners }) => {
   const toast = useToast();
   const [loadingUpdate, setLoadingUpdate] = useState(false);
-
   const [loading, setLoading] = useState(false);
+
   return (
     <Flex w='full' alignItems='center' justifyContent='center'>
       <Box
@@ -51,7 +51,6 @@ const BannerCard = ({ banner, setBanners }) => {
               bg='red.500'
               isLoading={loading}
               onClick={() => {
-                isLoading = { loading };
                 setLoading(true);
                 axios
                   .delete("/api/banners", { data: { id: banner.id } })
