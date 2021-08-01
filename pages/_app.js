@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import * as ga from "../lib/ga";
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
   useEffect(() => {
     const handleRouteChange = (url) => {
       ga.pageview(url);
