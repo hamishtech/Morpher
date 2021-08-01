@@ -26,12 +26,18 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
 
   if (session) {
-    return {
-      redirect: {
-        destination: "/app/avatars",
-        permanent: false,
-      },
-    };
+    const user = await supabase
+      .from("users")
+      .select("*")
+      .eq("id", session.userID);
+
+    if (user.data.length > 1)
+      return {
+        redirect: {
+          destination: "/app/avatars",
+          permanent: false,
+        },
+      };
   }
   const providers = await getProviders();
 
