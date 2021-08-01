@@ -35,7 +35,11 @@ const AppHome = (props) => {
           alignItems='center'
           justifyContent='space-between'
         >
-          <Flex w='100%' justifyContent='space-between'>
+          <Flex
+            w='100%'
+            justifyContent='space-between'
+            flexDirection={{ base: "column", sm: "column", md: "row" }}
+          >
             <Box>
               {" "}
               <ScheduleSwitch

@@ -52,15 +52,11 @@ export default async function handler(req, res) {
                 return res.status(200).json({ success: "banner updated" });
               })
               .catch((err) => {
-                res.status(400);
-                console.log(err);
-                throw error;
+                res.status(299).json({ error: err.error });
               });
           })
           .catch((error) => {
-            res.status(400);
-            console.log(error); // Logs an error if there was one
-            throw error;
+            res.status(999).json({ error: "error updating banner" });
           });
         res.status(200);
       }

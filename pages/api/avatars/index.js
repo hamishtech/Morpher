@@ -2,6 +2,7 @@ import { getSession, useSession } from "next-auth/client";
 import { supabase } from "../../../utils/supabaseClient";
 import Twit from "twit";
 const imageToBase64 = require("image-to-base64");
+import Twitter from "twitter-lite";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -38,32 +39,28 @@ export default async function handler(req, res) {
       console.log(data);
 
       if (req.body.url && data) {
-        let T = new Twit({
+        const client = new Twitter({
           consumer_key: process.env.TWITTER_CONSUMER_KEY,
           consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-          access_token: data[0].access_token,
+          access_token_key: data[0].access_token,
           access_token_secret: data[0].access_secret,
-          timeout_ms: 60 * 1000, // optional HTTP request timeout to apply to all requests.
-          strictSSL: true, // optional - requires SSL certificates to be valid.
         });
 
         imageToBase64(req.body.url) // Image URL
           .then((response) => {
-            T.post(
-              "account/update_profile_image",
-              {
+            client
+              .post("account/update_profile_image", {
                 image: response,
-              },
-              function (err, data, response) {
-                if (data) {
-                  return res.status(200).json({ success: "avatar updated" });
-                }
-              }
-            );
+              })
+              .then((response) => {
+                return res.status(200).json({ success: "banner updated" });
+              })
+              .catch((err) => {
+                res.status(299).json({ error: err.error });
+              });
           })
           .catch((error) => {
-            console.log(error); // Logs an error if there was one
-            res.status(400);
+            res.status(999).json({ error: "Error setting avatar" });
           });
       }
     } catch (error) {

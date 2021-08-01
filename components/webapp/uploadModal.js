@@ -19,14 +19,14 @@ import { FiUpload } from "react-icons/fi";
 
 function UploadModal({ setAvatars, setBanners, images_count, view }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [loadingUrl, setLoadingUrl] = useState(false);
   const [url, setURL] = useState("");
   const [invalidUrl, setInvalidUrl] = useState(false);
 
   if (images_count > 5) {
-    return <Box mb={10}>Maximum of 6 pictures reached</Box>;
+    return <Box mb={10}>{`Maximum of 6 ${view}`}</Box>;
   }
 
   const uploadURL = () => {
@@ -79,11 +79,13 @@ function UploadModal({ setAvatars, setBanners, images_count, view }) {
 
   const uploadImage = () => {
     setLoading(true);
+
     if (!image) {
       alert("No image found");
       setLoading(false);
       return;
     }
+
     const data = new FormData();
     data.append("upload_preset", "xadvuvf2");
     data.append("cloud_name", "twitterprofilepicmanager");
@@ -121,12 +123,7 @@ function UploadModal({ setAvatars, setBanners, images_count, view }) {
 
   return (
     <>
-      <Button
-        mb={10}
-        leftIcon={<FiUpload />}
-        onClick={onOpen}
-        bg='blue.500'
-      >
+      <Button mb={10} leftIcon={<FiUpload />} onClick={onOpen} bg='blue.500'>
         Upload
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
