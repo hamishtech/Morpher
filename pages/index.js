@@ -4,6 +4,7 @@ import { useRouter } from "next/dist/client/router";
 import Footer from "../components/footer";
 import Hero from "../components/homepage/hero";
 import Head from "next/head";
+import { supabase } from "../utils/supabaseClient";
 
 const HomePage = ({ providers }) => {
   const router = useRouter();
@@ -31,7 +32,7 @@ export async function getServerSideProps(context) {
       .select("*")
       .eq("id", session.userID);
 
-    if (user.data.length > 1)
+    if (user.count)
       return {
         redirect: {
           destination: "/app/avatars",
