@@ -7,8 +7,7 @@ import {
   useColorModeValue,
   VisuallyHidden,
 } from "@chakra-ui/react";
-import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
-import { ReactNode } from "react";
+import { FaTwitter } from "react-icons/fa";
 
 const SocialButton = ({ children, label, href }) => {
   return (
@@ -50,7 +49,15 @@ export default function Footer() {
         justify={{ base: "center", md: "space-between" }}
         align={{ base: "center", md: "center" }}
       >
-        <Text>© 2021 HamishCoding. All rights reserved</Text>
+        <Text>
+          © 2021{" "}
+          <span style={{ textDecoration: "underline" }}>
+            <a href='https://hamishtech.com/' target='_blank' rel='noreferrer'>
+              HamishTech
+            </a>
+          </span>{" "}
+          All rights reserved
+        </Text>
         <Stack direction={"row"} spacing={6}>
           <SocialButton
             label={"Twitter"}

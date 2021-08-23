@@ -1,6 +1,8 @@
 import {
+  Avatar,
   Box,
   Button,
+  Center,
   Flex,
   Image,
   useColorModeValue,
@@ -18,59 +20,73 @@ const AvatarCard = ({ avatar, setAvatars }) => {
     <Flex shadow='xl' w='full' alignItems='center' justifyContent='center'>
       <Box
         w='xs'
-        bg={useColorModeValue("white", "gray.800")}
+        bg={useColorModeValue("white", "gray.900")}
         rounded='lg'
         overflow='hidden'
         mx='auto'
       >
-        <Image w='full' h={56} fit='cover' src={avatar.url} alt='avatar' />
-        <Box textAlign='center'>
-          <Flex direction='column'>
-            <Button
-              mb='1'
-              isLoading={loadingUpdate}
-              bg='green.500'
-              onClick={() => {
-                setLoadingUpdate(true);
-                axios.put("/api/avatars", { url: avatar.url }).then((res) => {
-                  res.status === 200
-                    ? toast({
-                        title: "Avatar Updated.",
-                        status: "success",
-                        duration: 2000,
-                        isClosable: true,
-                      })
-                    : toast({
-                        title: "Problem Occured",
-                        description: res.data.error,
-                        status: "error",
-                        duration: 7000,
-                        isClosable: true,
-                      });
-                  setLoadingUpdate(false);
-                });
-              }}
-            >
-              Set as current avatar now
-            </Button>
-            <Button
-              bg='red.500'
-              isLoading={loading}
-              onClick={() => {
-                setLoading(true);
-                axios
-                  .delete("/api/avatars", { data: { id: avatar.id } })
-                  .then((res) => {
-                    setAvatars(res.data);
-                    setLoading(false);
-                  })
-                  .catch((err) => alert("error occurred deleting"));
-              }}
-            >
-              Delete
-            </Button>
-          </Flex>{" "}
-        </Box>
+        <Center>
+          <Avatar
+            boxSize='200px'
+            fit='cover'
+            src={avatar.url}
+            alt='avatar'
+            borderRadius='full'
+            mt={5}
+          />
+        </Center>
+        <Center>
+          {" "}
+          <Box textAlign='center' w='50%' my='5'>
+            <Flex direction='column'>
+              <Button
+                mb='1'
+                isLoading={loadingUpdate}
+                bg='green.500'
+                size='xs'
+                onClick={() => {
+                  setLoadingUpdate(true);
+                  axios.put("/api/avatars", { url: avatar.url }).then((res) => {
+                    res.status === 200
+                      ? toast({
+                          title: "Avatar Updated.",
+                          status: "success",
+                          duration: 2000,
+                          isClosable: true,
+                        })
+                      : toast({
+                          title: "Problem Occured",
+                          description: res.data.error,
+                          status: "error",
+                          duration: 7000,
+                          isClosable: true,
+                        });
+                    setLoadingUpdate(false);
+                  });
+                }}
+              >
+                Set as current avatar
+              </Button>
+              <Button
+                bg='red.500'
+                size='xs'
+                isLoading={loading}
+                onClick={() => {
+                  setLoading(true);
+                  axios
+                    .delete("/api/avatars", { data: { id: avatar.id } })
+                    .then((res) => {
+                      setAvatars(res.data);
+                      setLoading(false);
+                    })
+                    .catch((err) => alert("error occurred deleting"));
+                }}
+              >
+                Delete
+              </Button>
+            </Flex>{" "}
+          </Box>
+        </Center>{" "}
       </Box>
     </Flex>
   );
