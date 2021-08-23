@@ -3,13 +3,13 @@ import {
   Button,
   Container,
   Heading,
-  Image,
   ListItem,
   OrderedList,
   Stack,
   Text,
 } from "@chakra-ui/react";
 import { signIn } from "next-auth/client";
+import Image from "next/image";
 
 export default function Hero({ providers }) {
   return (
@@ -82,11 +82,16 @@ export default function Hero({ providers }) {
 
 export const Illustration = (props) => {
   return (
-    <Image
-      alt='description img'
-      src='https://images.mktw.net/im-309419?width=1280&size=1.77777778'
-      rounded='20px'
-      h='300px'
-    ></Image>
+    <Box
+      position='relative'
+      height='300px'
+      width='500px'
+    >
+      <Image
+        layout='fill'
+        objectFit='contain'
+        src='https://images.mktw.net/im-309419?width=1280&size=1.77777778'
+      />
+    </Box>
   );
 };
